@@ -44,6 +44,18 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
+        stage('Dependency Check') {
+    sh '''
+    /opt/dc/bin/dependency-check.sh \
+    --project demo \
+    --scan . \
+    --format HTML \
+    --out report \
+    --data /opt/dc/data \
+    --noupdate \
+    --failOnCVSS 11 || true
+    '''
+}
 
         stage('Docker Build & Push') {
             steps {
