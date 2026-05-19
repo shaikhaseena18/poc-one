@@ -24,18 +24,18 @@ pipeline {
                 sh 'mvn clean package' 
             }
         }
-        stage('SonarCloud Analysis') {
-            steps {
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
-                    sh '''
-                    mvn sonar:sonar \
-                    -Dsonar.projectKey=devsecops-app \
-                    -Dsonar.host.url=http://3.84.67.2:9000 \
-                    -Dsonar.login=sqa_fa1e14e5d8cf429f17551c85b5a3f919f7b4327d
-                    '''
-                }
-            }
+        stage('SonarQube Analysis') {
+    steps {
+        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+            sh '''
+            mvn sonar:sonar \
+            -Dsonar.projectKey=devsecops-app \
+            -Dsonar.host.url=http://3.84.67.2:9000 \
+            -Dsonar.login=$SONAR_TOKEN
+            '''
         }
+    }
+}
         stage('Security Scan (Dependency-Check)') {
             steps {
                 dependencyCheck additionalArguments: "--scan . --nvdApiKey=4a9f5b3b-391e-4ecb-8e57-71ab56079f0f",
