@@ -4,10 +4,10 @@ pipeline {
         maven 'Maven' // Must match the name in Jenkins Global Tool Config 
     }
     environment {
-        // Force the environment to use Java 21
-        JAVA_HOME = "/usr/lib/jvm/java-21-openjdk-amd64"
-        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-    }
+    JAVA_HOME = "/usr/lib/jvm/java-21-amazon-corretto.x86_64"
+    PATH = "$JAVA_HOME/bin:$PATH"
+}
+
     stages {
         stage('Git Checkout') {
             steps { checkout scm }
