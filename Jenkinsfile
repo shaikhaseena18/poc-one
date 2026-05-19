@@ -26,7 +26,7 @@ pipeline {
         }
         stage('SonarCloud Analysis') {
             steps {
-                withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
                     sh '''
                     mvn sonar:sonar \
                     -Dsonar.projectKey=shaikhaseena8 \
