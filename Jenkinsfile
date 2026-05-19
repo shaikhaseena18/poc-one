@@ -45,17 +45,19 @@ pipeline {
             }
         }
         stage('Dependency Check') {
-    sh '''
-    /opt/dc/bin/dependency-check.sh \
-    --project demo \
-    --scan . \
-    --format HTML \
-    --out report \
-    --data /opt/dc/data \
-    --noupdate \
-    --failOnCVSS 11 || true
-    '''
+    steps {
+        sh '''
+        /opt/dc/bin/dependency-check.sh \
+        --project demo \
+        --scan . \
+        --format HTML \
+        --out report \
+        --data /opt/dc/data \
+        --noupdate || true
+        '''
+    }
 }
+
 
         stage('Docker Build & Push') {
             steps {
