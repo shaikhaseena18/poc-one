@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven3' // Must match the name in Jenkins Global Tool Config 
+        maven 'Maven' // Must match the name in Jenkins Global Tool Config 
     }
     environment {
         // Force the environment to use Java 21
@@ -29,10 +29,10 @@ pipeline {
                 withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
                     sh '''
                     mvn sonar:sonar \
-                    -Dsonar.projectKey=pavankattamuri8 \
-                    -Dsonar.organization=pavankattamuri8 \
+                    -Dsonar.projectKey=shaikhaseena8 \
+                    -Dsonar.organization=shaikhaseena8 \
                     -Dsonar.host.url=https://sonarcloud.io \
-                    -Dsonar.login=$SONAR_TOKEN
+                    -Dsonar.login=sqa_fa1e14e5d8cf429f17551c85b5a3f919f7b4327d
                     '''
                 }
             }
